@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spoke & Chain — Bicycle Repair, 14 Foundry Lane</title>
+<meta name="description" content="Neighbourhood bicycle repair at 14 Foundry Lane. Tune-ups, wheel truing, e-bike checks and flat fixes. Book a drop-off slot online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500&family=Kalam:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pegboard:#E9ECEF;
+    --green:#1E5A47;
+    --manila:#F2D680;
+    --grease:#191A17;
+    --chrome:#D5D9DE;
+    --orange:#FF6B1A;
+    --hole:#C4C9CF;
+    --chrome-dark:#9AA1A9;
+    --display:"Big Shoulders Display", Impact, sans-serif;
+    --body:"IBM Plex Sans", system-ui, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, monospace;
+    --wrap:1180px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background-color:var(--pegboard);
+    background-image:radial-gradient(circle, var(--hole) 3.2px, transparent 3.8px);
+    background-size:28px 28px;
+    background-position:14px 14px;
+    color:var(--grease);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  :focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .skip{position:absolute;left:-9999px;top:8px;background:var(--grease);color:#fff;padding:8px 12px;z-index:10}
+  .skip:focus{left:8px}
+
+  /* signage strip */
+  .strip{background:var(--green);color:#fff}
+  .strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:44px}
+  .brand{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:.02em;text-transform:uppercase;text-decoration:none}
+  .strip .mid,.strip .status{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+  .status{display:flex;align-items:center;gap:8px}
+  .dot{width:10px;height:10px;border-radius:50%;background:#6EE69A;box-shadow:0 0 0 3px rgba(110,230,154,.25)}
+  .status.closed .dot{background:#F08B6A;box-shadow:0 0 0 3px rgba(240,139,106,.25)}
+
+  /* hero */
+  .hero{padding:72px 0 96px}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  h1{font-family:var(--display);font-weight:800;text-transform:uppercase;line-height:.86;margin:0;font-size:clamp(64px,9.4vw,136px);letter-spacing:-.005em}
+  h1 .line{display:block}
+  h1 .hl{display:inline-block;background:var(--grease);color:var(--manila);padding:.04em .12em .02em;margin-top:.1em}
+  .lede{font-size:20px;max-width:28ch;margin:36px 0 36px}
+  .actions{display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+  .btn{
+    display:inline-block;background:var(--orange);color:var(--grease);
+    font-family:var(--mono);font-weight:600;font-size:16px;letter-spacing:.12em;text-transform:uppercase;
+    padding:18px 26px;border:3px solid var(--grease);box-shadow:6px 6px 0 var(--grease);
+    text-decoration:none;cursor:pointer;transition:transform .12s, box-shadow .12s;
+  }
+  .btn:hover{transform:translate(2px,2px);box-shadow:4px 4px 0 var(--grease)}
+  .btn:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--grease)}
+  .textlink{font-family:var(--mono);font-size:15px;text-decoration:none;border-bottom:2px solid var(--grease);padding-bottom:2px}
+  .textlink:hover{color:var(--green);border-color:var(--green)}
+
+  /* ticket (signature) */
+  .ticket-hang{position:relative;display:flex;justify-content:center;padding-top:70px}
+  .hook{position:absolute;top:0;left:50%;width:34px;height:78px;transform:translateX(-50%);z-index:2}
+  .ticket{
+    position:relative;width:100%;max-width:370px;background:var(--manila);
+    padding:48px 30px 0;transform:rotate(2.5deg);transform-origin:50% 0;
+    box-shadow:0 18px 30px -12px rgba(25,26,23,.35), 0 2px 0 rgba(25,26,23,.05);
+    clip-path:polygon(0 0,44% 0,50% 5.5%,56% 0,100% 0,100% 100%,0 100%);
+    animation:sway 5s ease-in-out infinite;
+  }
+  .ticket::before{ /* punched hole */
+    content:"";position:absolute;top:22px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;
+    background:var(--pegboard);box-shadow:inset 0 2px 3px rgba(0,0,0,.25);
+  }
+  .string{position:absolute;top:58px;left:50%;width:2px;height:40px;background:var(--grease);transform:translateX(-50%);z-index:3}
+  @keyframes sway{0%,100%{transform:rotate(2.5deg)}50%{transform:rotate(-.5deg)}}
+  .t-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+  .t-title{font-family:var(--display);font-weight:800;font-size:36px;line-height:1}
+  .t-no{font-family:var(--mono);font-weight:600;font-size:15px}
+  .field{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1.5px solid var(--grease);padding:10px 0 2px;gap:12px}
+  .field span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+  .field b{font-family:"Kalam",cursive;font-weight:700;color:#23306E;font-size:19px;line-height:1.2}
+  .checks{list-style:none;margin:18px 0 22px;padding:0;font-family:var(--mono);font-size:15px;position:relative}
+  .checks li{display:flex;align-items:center;gap:10px;padding:3px 0}
+  .box{width:18px;height:18px;border:1.8px solid var(--grease);flex:none;position:relative}
+  .box.x::before,.box.x::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:2px;background:#23306E;transform:translate(-50%,-50%) rotate(45deg)}
+  .box.x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+  .stamp{
+    position:absolute;right:-6px;top:50%;width:112px;height:112px;margin-top:-56px;border-radius:50%;
+    border:3px solid var(--orange);color:var(--orange);display:grid;place-content:center;text-align:center;
+    transform:rotate(-14deg);font-family:var(--display);font-weight:800;line-height:.9;mix-blend-mode:multiply;
+  }
+  .checks li.stamp{display:grid;gap:0;padding:0}
+  .stamp small{font-size:19px}
+  .stamp strong{font-size:38px}
+  .stub{display:flex;justify-content:space-between;border-top:2px dashed var(--grease);margin:0 -30px;padding:14px 30px 18px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
+  /* sections */
+  section{padding:72px 0}
+  h2{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(44px,5.4vw,64px);line-height:.95;margin:0}
+  .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-bottom:28px}
+  .note{font-family:var(--mono);font-size:14px}
+
+  /* parts drawers */
+  .cabinet{background:var(--chrome-dark);padding:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-radius:4px;box-shadow:0 22px 30px -18px rgba(25,26,23,.45)}
+  .drawer{background:linear-gradient(180deg,#E3E6EA 0%, var(--chrome) 100%);padding:20px 18px 0;display:flex;flex-direction:column;border-radius:2px;box-shadow:inset 0 1px 0 #fff, inset 0 -2px 0 rgba(0,0,0,.08)}
+  .label{background:#fff;border:2px solid #7C838B;padding:12px 14px;box-shadow:inset 0 0 0 3px #fff, inset 0 0 0 4px #DADDE1}
+  .label h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;margin:0 0 8px}
+  .price{font-family:var(--mono);font-weight:600;font-size:22px}
+  .price small{font-size:12px;font-weight:400;margin-left:6px}
+  .drawer p{font-size:14.5px;line-height:1.5;margin:16px 4px 12px;flex:1}
+  .eta{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 4px 14px}
+  .pull{display:block;width:90px;height:14px;margin:0 auto;background:#7C838B;border-radius:0 0 14px 14px;box-shadow:inset 0 3px 0 rgba(0,0,0,.18)}
+
+  /* how it works */
+  .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:2px solid var(--grease);counter-reset:s}
+  .steps li{padding:22px 24px 26px;border-right:2px solid var(--grease);counter-increment:s}
+  .steps li:last-child{border-right:0}
+  .steps li::before{content:counter(s);display:block;font-family:var(--display);font-weight:800;font-size:72px;line-height:.9;color:var(--green)}
+  .steps h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1.05;margin:6px 0 6px}
+  .steps p{margin:0;font-size:16px}
+
+  /* open + booking */
+  .bottom .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+  .sign{background:var(--green);color:#fff;border-radius:14px;padding:26px 30px 30px;border:4px solid #fff;outline:2px solid var(--green);box-shadow:0 20px 30px -16px rgba(25,26,23,.5);position:relative}
+  .sign::before,.sign::after{content:"";position:absolute;top:12px;width:9px;height:9px;border-radius:50%;background:var(--chrome);box-shadow:inset 0 -2px 0 rgba(0,0,0,.25)}
+  .sign::before{left:12px}.sign::after{right:12px}
+  .sign h2{font-size:clamp(72px,8vw,96px);color:#fff;margin-bottom:14px}
+  .sign.is-closed h2{color:var(--manila)}
+  .hours{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:16px}
+  .hours th{text-align:left;font-weight:400;padding:6px 0}
+  .hours td{text-align:right;font-weight:600;padding:6px 0}
+  .hours tr.today th,.hours tr.today td{color:var(--manila)}
+
+  .book p.sub{margin:10px 0 20px}
+  .days{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .day{font-family:var(--mono);font-size:14px;padding:8px 12px;border:2px solid var(--grease);background:#fff;cursor:pointer;text-transform:uppercase;letter-spacing:.08em}
+  .day[aria-pressed="true"]{background:var(--grease);color:var(--manila)}
+  .slots{display:flex;flex-wrap:wrap;gap:0;margin:0 0 22px;padding:0;border:0}
+  .slots legend{position:absolute;left:-9999px}
+  .slot{position:relative}
+  .slot input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+  .slot label{
+    display:block;width:92px;padding:12px 0 8px;text-align:center;background:var(--manila);
+    border:2px dashed #8A7A3A;margin-left:-2px;cursor:pointer;transition:transform .12s;
+  }
+  .slot:first-child label{margin-left:0}
+  .slot label b{display:block;font-family:var(--display);font-weight:800;font-size:30px;line-height:1}
+  .slot label i{display:block;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
+  .slot input:hover + label{transform:translateY(-3px)}
+  .slot input:focus-visible + label{outline:3px solid var(--orange);outline-offset:2px;position:relative;z-index:1}
+  .slot input:checked + label{background:var(--orange);border-style:solid;border-color:var(--grease);transform:translateY(-6px) rotate(-2deg);position:relative;z-index:1}
+  .slot input:disabled + label{background:var(--chrome);color:#9AA1A9;cursor:not-allowed;transform:none}
+  .slot input:disabled + label b{text-decoration:line-through}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .form-row label{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  .form-row input,.form-row select{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--grease);background:#fff;border-radius:0}
+  .confirm{margin-top:22px;background:var(--manila);border:2px solid var(--grease);padding:16px 20px;font-family:var(--mono);font-size:15px;display:none}
+  .confirm.show{display:block}
+  .confirm strong{font-family:var(--display);font-size:26px;display:block;text-transform:uppercase}
+  .err{color:#B3380A;font-family:var(--mono);font-size:14px;margin:0 0 12px;min-height:1em}
+
+  footer{background:var(--grease);color:#fff;margin-top:72px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-top:24px;padding-bottom:24px;font-family:var(--mono);font-size:14px}
+
+  @media (max-width:960px){
+    .hero .wrap{grid-template-columns:1fr;gap:24px}
+    .ticket-hang{margin-top:24px}
+    .cabinet{grid-template-columns:repeat(2,1fr)}
+    .bottom .wrap{grid-template-columns:1fr}
+  }
+  @media (max-width:720px){
+    .strip .mid{display:none}
+    .hero{padding:48px 0 56px}
+    .lede{font-size:19px}
+    .steps{grid-template-columns:1fr}
+    .steps li{border-right:0;border-bottom:2px solid var(--grease)}
+    .steps li:last-child{border-bottom:0}
+    section{padding:52px 0}
+  }
+  @media (max-width:520px){
+    .wrap{padding:0 18px}
+    .cabinet{grid-template-columns:1fr}
+    .ticket{padding:46px 22px 0}
+    .stub{margin:0 -22px;padding:14px 22px 18px}
+    .t-title{font-size:32px}
+    .stamp{width:94px;height:94px;margin-top:-47px;right:-4px}
+    .stamp strong{font-size:32px}.stamp small{font-size:16px}
+    .form-row{grid-template-columns:1fr}
+    .slot label{width:calc((100vw - 36px) / 3 + 1px)}
+    .actions{gap:22px}
+    .strip .status{font-size:12px;letter-spacing:.1em}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#book">Skip to booking</a>
+
+<header class="strip">
+  <div class="wrap">
+    <a class="brand" href="#top">Spoke &amp; Chain</a>
+    <span class="mid">Bicycle repair · 14 Foundry Lane</span>
+    <span class="status" id="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Open until 19:00</span></span>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1><span class="line">Broken</span><span class="line">bike?</span><span class="hl">Hang it on<br>our hook.</span></h1>
+        <p class="lede">Drop it off before 10, ride it home after 5. Flats are fixed while you wait.</p>
+        <div class="actions">
+          <a class="btn" href="#book">Book a repair slot</a>
+          <a class="textlink" href="#prices">See prices →</a>
+        </div>
+      </div>
+
+      <div class="ticket-hang" aria-label="Example repair ticket">
+        <svg class="hook" viewBox="0 0 34 78" aria-hidden="true">
+          <circle cx="17" cy="8" r="6" fill="#7C838B"/>
+          <path d="M17 10 V58 Q17 70 5 70" fill="none" stroke="#7C838B" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <span class="string" aria-hidden="true"></span>
+        <article class="ticket">
+          <div class="t-head"><span class="t-title">Repair ticket</span><span class="t-no">No. 0417</span></div>
+          <div class="field"><span>Name</span><b>Maya K.</b></div>
+          <div class="field"><span>Bike</span><b>green commuter, 8-speed</b></div>
+          <ul class="checks">
+            <li><span class="box x" aria-hidden="true"></span>Flat tyre, rear</li>
+            <li><span class="box x" aria-hidden="true"></span>Brake pads</li>
+            <li><span class="box" aria-hidden="true"></span>Gear indexing</li>
+            <li><span class="box x" aria-hidden="true"></span>Chain clean &amp; lube</li>
+            <li class="stamp" aria-label="Ready by 17:30"><small>Ready by</small><strong>17:30</strong></li>
+          </ul>
+          <div class="stub"><span>Keep this stub</span><span>0417</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap">
+      <div class="sec-head"><h2>Parts drawers</h2><span class="note">Prices include labour. Parts at cost.</span></div>
+      <div class="cabinet">
+        <div class="drawer">
+          <div class="label"><h3>Tune-up</h3><div class="price">$65</div></div>
+          <p>Brakes, gears and bearings adjusted, everything tightened, full safety check.</p>
+          <div class="eta">Back in 2 days</div><span class="pull" aria-hidden="true"></span>
+        </div>
+        <div class="drawer">
+          <div class="label"><h3>Wheel truing</h3><div class="price">$30<small>/ wheel</small></div></div>
+          <p>Spoke tension balanced until the rim runs straight and stops rubbing the brake.</p>
+          <div class="eta">Back next day</div><span class="pull" aria-hidden="true"></span>
+        </div>
+        <div class="drawer">
+          <div class="label"><h3>E-bike check</h3><div class="price">$90<small>from</small></div></div>
+          <p>Motor, battery and wiring diagnostics, firmware update, then the usual tune-up.</p>
+          <div class="eta">Back in 3 days</div><span class="pull" aria-hidden="true"></span>
+        </div>
+        <div class="drawer">
+          <div class="label"><h3>Flat fix</h3><div class="price">$15</div></div>
+          <p>New tube, tyre checked for glass and thorns, pressure set for your weight.</p>
+          <div class="eta">While you wait</div><span class="pull" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><h2>How it works</h2></div>
+      <ol class="steps">
+        <li><h3>Drop it off</h3><p>Any time we're open. You get a ticket with a number.</p></li>
+        <li><h3>We call with a quote</h3><p>Nothing extra gets fixed until you say yes.</p></li>
+        <li><h3>Ride it home</h3><p>Bring the stub. Pay when you pick it up.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bottom">
+    <div class="wrap">
+      <div class="sign" id="sign">
+        <h2 id="sign-word">Open</h2>
+        <table class="hours">
+          <caption class="skip">Opening hours</caption>
+          <tr data-days="1,2,3,4,5"><th>Mon – Fri</th><td>09:00 – 19:00</td></tr>
+          <tr data-days="6"><th>Saturday</th><td>10:00 – 17:00</td></tr>
+          <tr data-days="0"><th>Sunday</th><td>closed, we ride</td></tr>
+        </table>
+      </div>
+
+      <div class="book" id="book">
+        <h2>Take a number</h2>
+        <p class="sub">Pick a drop-off slot. We'll text you when the bike is ready.</p>
+        <form id="book-form" novalidate>
+          <div class="days" id="days" role="group" aria-label="Drop-off day"></div>
+          <fieldset class="slots" id="slots"><legend>Drop-off time</legend></fieldset>
+          <div class="form-row">
+            <div><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
+            <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" required></div>
+          </div>
+          <div class="form-row">
+            <div><label for="service">Service</label>
+              <select id="service" name="service">
+                <option>Tune-up — $65</option><option>Wheel truing — $30 / wheel</option>
+                <option>E-bike check — from $90</option><option>Flat fix — $15</option><option>Not sure yet</option>
+              </select></div>
+          </div>
+          <p class="err" id="err" role="alert"></p>
+          <button class="btn" type="submit">Take this number</button>
+        </form>
+        <div class="confirm" id="confirm" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>Spoke &amp; Chain · 14 Foundry Lane · +1 555 0147</span><span>No bike too old.</span></div>
+</footer>
+
+<script>
+(function(){
+  var HOURS = {0:null,1:[9,19],2:[9,19],3:[9,19],4:[9,19],5:[9,19],6:[10,17]};
+  var DAY = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var now = new Date();
+
+  // live status
+  var h = HOURS[now.getDay()], t = now.getHours() + now.getMinutes()/60;
+  var open = h && t >= h[0] && t < h[1];
+  var st = document.getElementById('status'), stt = document.getElementById('status-text');
+  if (open) { stt.textContent = 'Open until ' + h[1] + ':00'; }
+  else {
+    st.classList.add('closed');
+    var n = new Date(now); var guard = 0;
+    do { if (!(guard===0 && h && t < h[0])) n.setDate(n.getDate()+1); guard++; } while(!HOURS[n.getDay()] && guard<8);
+    var nh = HOURS[n.getDay()];
+    stt.textContent = 'Closed · opens ' + (guard===1 && n.getDate()===now.getDate() ? 'today' : DAY[n.getDay()]) + ' ' + String(nh[0]).padStart(2,'0') + ':00';
+    document.getElementById('sign').classList.add('is-closed');
+    document.getElementById('sign-word').textContent = 'Closed';
+  }
+  document.querySelectorAll('.hours tr').forEach(function(r){
+    if (r.dataset.days.split(',').indexOf(String(now.getDay())) > -1) r.classList.add('today');
+  });
+
+  // next 5 open days
+  var days = [], d = new Date(now); d.setHours(0,0,0,0);
+  if (h && t > h[1]-1.5) d.setDate(d.getDate()+1);
+  while (days.length < 5) { if (HOURS[d.getDay()]) days.push(new Date(d)); d.setDate(d.getDate()+1); }
+
+  // deterministic "taken" slots so the demo looks lived-in
+  function taken(date, slot){ return ((date.getDate()*7 + slot*13) % 5) === 0; }
+
+  var daysEl = document.getElementById('days'), slotsEl = document.getElementById('slots');
+  var chosenDay = 0;
+
+  function renderDays(){
+    daysEl.innerHTML = '';
+    days.forEach(function(dt,i){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'day';
+      b.textContent = DAY[dt.getDay()] + ' ' + dt.getDate();
+      b.setAttribute('aria-pressed', i===chosenDay ? 'true':'false');
+      b.onclick = function(){ chosenDay = i; renderDays(); renderSlots(); };
+      daysEl.appendChild(b);
+    });
+  }
+  function renderSlots(){
+    var dt = days[chosenDay], hh = HOURS[dt.getDay()];
+    slotsEl.querySelectorAll('.slot').forEach(function(s){ s.remove(); });
+    var isToday = dt.toDateString() === now.toDateString();
+    var times = [];
+    for (var x = hh[0]; x <= hh[1]-2; x += 1.5) times.push(x);
+    times.forEach(function(x, i){
+      var label = String(Math.floor(x)).padStart(2,'0') + ':' + (x%1 ? '30' : '00');
+      var past = isToday && x <= t;
+      var dis = past || taken(dt, i);
+      var w = document.createElement('div'); w.className = 'slot';
+      var id = 's' + chosenDay + '-' + i;
+      w.innerHTML = '<input type="radio" name="slot" id="'+id+'" value="'+label+'"'+(dis?' disabled':'')+'>' +
+        '<label for="'+id+'"><b>'+label+'</b><i>'+(dis ? 'taken' : DAY[dt.getDay()])+'</i></label>';
+      slotsEl.appendChild(w);
+    });
+  }
+  renderDays(); renderSlots();
+
+  var num = 418;
+  document.getElementById('book-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var err = document.getElementById('err');
+    var slot = this.querySelector('input[name=slot]:checked');
+    var name = this.name.value.trim(), phone = this.phone.value.trim();
+    if (!slot) { err.textContent = 'Pick a time stub first.'; return; }
+    if (!name || phone.replace(/\D/g,'').length < 6) { err.textContent = 'We need your name and a phone number to text you.'; return; }
+    err.textContent = '';
+    var dt = days[chosenDay];
+    var c = document.getElementById('confirm');
+    c.innerHTML = '<strong>Your number: ' + String(num++).padStart(4,'0') + '</strong>' +
+      name.replace(/[<>&]/g,'') + ', see you ' + DAY[dt.getDay()] + ' ' + dt.getDate() + ' at ' + slot.value +
+      '.<br>' + this.service.value + '. We\'ll text ' + phone.replace(/[<>&]/g,'') + ' with a quote.';
+    c.classList.add('show');
+    slot.disabled = true; slot.checked = false;
+    slot.nextElementSibling.querySelector('i').textContent = 'yours';
+  });
+})();
+</script>
+</body>
+</html>
